@@ -92,7 +92,7 @@ cat > $TEST_DIR/numbers.json << EOF
         1,
         -1,
         1.5,
-        -1..5
+        -1.5
     ]
 }
 EOF
