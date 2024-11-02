@@ -1,4 +1,4 @@
-# JSON Expression Evaluator
+# JSON Expression Parser
 
 A C++ application that parses JSON files and evaluates expressions on JSON data. Built with modern C++17 and optimized with multithreading support.
 
