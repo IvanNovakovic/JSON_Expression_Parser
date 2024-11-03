@@ -5,7 +5,7 @@ NC='\033[0m'
 
 # Detect OS and set executable path
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
-    EXECUTABLE="./build/Release/json_eval.exe"
+    EXECUTABLE="./build/Debug/json_eval.exe"
 else
     EXECUTABLE="./build/json_eval"
 fi
