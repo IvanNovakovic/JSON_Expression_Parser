@@ -16,21 +16,24 @@ if ! command -v cmake &> /dev/null; then
     exit 1
 fi
 
-# # Configure project with CMake
-# echo "Configuring project..."
-# if ! cmake -S . -B build; then
-#     echo -e "${RED}CMake configuration failed${NC}"
-#     exit 1
-# fi
-
-# Configure project with CMake using maximum optimizations
-echo "Configuring project..."
-if ! cmake -S . -B build \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-O3 -march=native -flto=${NUM_CORES} -ffast-math" \
-    -DCMAKE_EXE_LINKER_FLAGS="-flto=${NUM_CORES} -fuse-linker-plugin"; then
-    echo -e "${RED}CMake configuration failed${NC}"
-    exit 1
+# Detect OS and set executable path
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+    # Configure project with CMake
+    echo "Configuring project..."
+    if ! cmake -S . -B build; then
+        echo -e "${RED}CMake configuration failed${NC}"
+        exit 1
+    fi
+else
+    # Configure project with CMake using maximum optimizations
+    echo "Configuring project..."
+    if ! cmake -S . -B build \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_CXX_FLAGS="-O3 -march=native -flto=${NUM_CORES} -ffast-math" \
+        -DCMAKE_EXE_LINKER_FLAGS="-flto=${NUM_CORES} -fuse-linker-plugin"; then
+        echo -e "${RED}CMake configuration failed${NC}"
+        exit 1
+    fi
 fi
 
 # Build project
