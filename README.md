@@ -17,6 +17,7 @@ A C++ application that parses JSON files and evaluates expressions on JSON data.
 Use the provided build script:
 
 ```bash
+chmod +x build.sh # if it doesn't run
 ./build.sh
 ```
 
@@ -66,4 +67,14 @@ Add -v flag for verbose output:
 ## Requirements
 
 - C++17 compatible compiler (GCC, Clang, or MSVC)
+  - GCC 13 or higher
 - CMake 3.28 or higher
+
+## Tested on
+- Windows 11
+  - CMake 3.30.5
+  - Visual Studio 17 2022
+  - MSVC 19.41.34123.0
+- WSL2 Ubuntu 24.4 (cmake 3.28.3, gcc 13.2.0)
+  - CMake 3.28.3
+  - GCC 13.2.0

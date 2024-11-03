@@ -3,6 +3,13 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
+# Detect OS and set executable path
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+    EXECUTABLE="./build/Release/json_eval.exe"
+else
+    EXECUTABLE="./build/json_eval"
+fi
+
 # Parse command line arguments
 VERBOSE=false
 while [[ "$#" -gt 0 ]]; do
@@ -24,10 +31,10 @@ echo "Working directory: $(pwd)"
 # Build the project
 echo "Building project..."
 cmake -S . -B build
-cmake --build build -j 12
+cmake --build build -j $(nproc)
 
 # Verify executable exists
-if [ ! -f "./build/json_eval" ]; then
+if [ ! -f "$EXECUTABLE" ]; then
     echo -e "${RED}Error: json_parser executable not found${NC}"
     echo "Build may have failed or executable path is incorrect"
     exit 1
@@ -48,12 +55,12 @@ run_test() {
     
     if [ "$VERBOSE" = true ]; then
         echo "Testing: $desc"
-        echo "Command: ./build/json_eval '$input_file' '$expression'"
-        result=$(./build/json_eval "$input_file" "$expression" 2>&1)
+        echo "Command: $EXECUTABLE '$input_file' '$expression'"
+        result=$($EXECUTABLE "$input_file" "$expression" 2>&1)
         echo "Output : $result"
     else
         echo "Testing: $desc... "
-        result=$(./build/json_eval "$input_file" "$expression" 2>&1)
+        result=$($EXECUTABLE "$input_file" "$expression" 2>&1)
     fi
     
     if [ "$result" == "$expected" ]; then
