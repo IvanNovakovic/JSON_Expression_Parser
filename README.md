@@ -75,6 +75,6 @@ Add -v flag for verbose output:
   - CMake 3.30.5
   - Visual Studio 17 2022
   - MSVC 19.41.34123.0
-- WSL2 Ubuntu 24.4 (cmake 3.28.3, gcc 13.2.0)
+- WSL2 Ubuntu 24.4 (cmake 3.28.3, gcc 13.2.0) - Recommended
   - CMake 3.28.3
   - GCC 13.2.0
